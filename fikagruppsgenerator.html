@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<meta charset="utf-8" />
+<title>Fikagruppsgenerator</title>
+<style>
+body { padding:1em }
+h2 { margin-top:2em }
+/* li:first-of-type { font-weight: bold; } */
+</style>
+</head>
+<body>
+<main role="main" class="container">
+	<div>
+		<h1>Deterministisk fikagruppsgenerator</h1>
+		<p class="lead">Nya grupper slumpas automatiskt baserat på veckonummer. <!-- Först i var grupp är sammankallande.--> Glöm inte ta en skärmdump och posta bilden i #c-standup.</p>
+	</div>
+	<div id="groups" class="row"></div>
+</main>
+<script>
+// the following adds the Math.seedrandom() function, making random() deterministic if given the same seed. (Technically I believe it was always deterministic, but not in a useful way.)
+!function(a,b,c,d,e,f,g,h,i){function j(a){var b,c=a.length,e=this,f=0,g=e.i=e.j=0,h=e.S=[];for(c||(a=[c++]);d>f;)h[f]=f++;for(f=0;d>f;f++)h[f]=h[g=s&g+a[f%c]+(b=h[f])],h[g]=b;(e.g=function(a){for(var b,c=0,f=e.i,g=e.j,h=e.S;a--;)b=h[f=s&f+1],c=c*d+h[s&(h[f]=h[g=s&g+b])+(h[g]=b)];return e.i=f,e.j=g,c})(d)}function k(a,b){var c,d=[],e=typeof a;if(b&&"object"==e)for(c in a)try{d.push(k(a[c],b-1))}catch(f){}return d.length?d:"string"==e?a:a+"\0"}function l(a,b){for(var c,d=a+"",e=0;e<d.length;)b[s&e]=s&(c^=19*b[s&e])+d.charCodeAt(e++);return n(b)}function m(c){try{return o?n(o.randomBytes(d)):(a.crypto.getRandomValues(c=new Uint8Array(d)),n(c))}catch(e){return[+new Date,a,(c=a.navigator)&&c.plugins,a.screen,n(b)]}}function n(a){return String.fromCharCode.apply(0,a)}var o,p=c.pow(d,e),q=c.pow(2,f),r=2*q,s=d-1,t=c["seed"+i]=function(a,f,g){var h=[];f=1==f?{entropy:!0}:f||{};var o=l(k(f.entropy?[a,n(b)]:null==a?m():a,3),h),s=new j(h);return l(n(s.S),b),(f.pass||g||function(a,b,d){return d?(c[i]=a,b):a})(function(){for(var a=s.g(e),b=p,c=0;q>a;)a=(a+c)*d,b*=d,c=s.g(1);for(;a>=r;)a/=2,b/=2,c>>>=1;return(a+c)/b},o,"global"in f?f.global:this==c)};if(l(c[i](),b),g&&g.exports){g.exports=t;try{o=require("crypto")}catch(u){}}else h&&h.amd&&h(function(){return t})}(this,[],Math,256,6,52,"object"==typeof module&&module,"function"==typeof define&&define,"random");
+
+// calculate the week number of the year, multiply by the current year, and use as seed for the random function.
+function getSeed() {
+	var d = new Date();
+	d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+	d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
+	return d.getFullYear() * Math.ceil(( ( (d -  new Date(Date.UTC(d.getUTCFullYear(),0,1))) / 86400000) + 1)/7);
+}
+Math.seedrandom(getSeed());
+
+
+// all participants in an array, with a function to splice one random element out of the array and return it
+function grabNext(){
+	var r = Math.floor( Math.random()*ppl.length );
+	return ppl.splice(r,1)[0];
+}
+var ppl = [
+	"Amanda Cirverius",
+	"Ann-Louise Ulfsparre",
+	"Cecilia Bjuhr",
+	"Cecilia Borg",
+	"Christoffer Hellgren",
+	"Dan Eidmark",
+	"Dan Peterström",
+	"Erika Ornstein",
+	"Fredrik Zander",
+	"Fredrika Karlsson",
+	"Frida Wallentin",
+	"Gustaf Brandberg",
+	"Helena Solheim",
+	"Henrik Olsson",
+	"Johan Östling",
+	"Johan Söderström",
+	"Magnus Ristner",
+	"Markus Lindgren",
+	"Mia Pilebro",
+	"Nathalie Cirverius",
+	"Peter Byström",
+	"Peter Hamberg",
+	"Peter Törnhult",
+	"Regina Sipos",
+	"Sandra Ahnkron",
+	"Teddy Zetterlund",
+	"Tobias Modig",
+	"Torbjörn Vading"
+];
+
+var maxGroupSize = 4;
+var groupCount = Math.ceil(ppl.length / maxGroupSize);
+var g=0;
+var groups = [];
+
+// keep taking random names from the ppl array, and add them one after another into the different groups.
+while( ppl.length > 0 ) {
+	if( groups[ g%groupCount ] === undefined ){
+		groups[ g%groupCount ] = [];
+	}
+	groups[ g%groupCount ].push( grabNext() );
+	g++;
+}
+
+// write the result to the #group div
+var groupNames = ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"];
+var str = "";
+for( var group in groups ) {
+	str += `<div class="col-md-6"><h2>Grupp ${groupNames[group]}</h2><ul class="list-group">`;
+	for( var p of groups[group] ){
+		str += `<li class="list-group-item">${p}</li>`;
+	}
+	str += "</ul></div>\n";
+}
+document.getElementById("groups").innerHTML += str;
+</script>
+</body></html>
