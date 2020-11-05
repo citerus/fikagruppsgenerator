@@ -1,0 +1,129 @@
+{
+	"people": [
+		{
+			"name": "Amanda Cirverius",
+			"walktalk": 1,
+			"fika": 2
+		},
+		{
+			"name": "Ann-Louise Ulfsparre",
+			"walktalk": 1,
+			"fika": 2
+		},
+		{
+			"name": "Cecilia Bjuhr",
+			"walktalk": 1,
+			"fika": 2
+		},
+		{
+			"name": "Christoffer Hellgren",
+			"walktalk": 1,
+			"fika": 2
+		},
+		{
+			"name": "Dan Eidmark",
+			"walktalk": 1,
+			"fika": 2
+		},
+		{
+			"name": "Dan Peterström",
+			"walktalk": 1,
+			"fika": 2
+		},
+		{
+			"name": "Erika Ornstein",
+			"walktalk": 1,
+			"fika": 2
+		},
+		{
+			"name": "Fredrik Zander",
+			"walktalk": 1,
+			"fika": 2
+		},
+		{
+			"name": "Fredrika Karlsson",
+			"walktalk": 1,
+			"fika": 2
+		},
+		{
+			"name": "Frida Wallentin",
+			"walktalk": 1,
+			"fika": 2
+		},
+		{
+			"name": "Gustaf Brandberg",
+			"walktalk": 0,
+			"fika": 3
+		},
+		{
+			"name": "Helena Solheim",
+			"walktalk": 1,
+			"fika": 2
+		},
+		{
+			"name": "Henrik Olsson",
+			"walktalk": 1,
+			"fika": 2
+		},
+		{
+			"name": "Johan Östling",
+			"walktalk": 1,
+			"fika": 2
+		},
+		{
+			"name": "Johan Söderström",
+			"walktalk": 1,
+			"fika": 2
+		},
+		{
+			"name": "Magnus Ristner",
+			"walktalk": 1,
+			"fika": 2
+		},
+		{
+			"name": "Markus Lindgren",
+			"walktalk": 1,
+			"fika": 2
+		},
+		{
+			"name": "Nathalie Cirverius",
+			"walktalk": 1,
+			"fika": 2
+		},
+		{
+			"name": "Peter Byström",
+			"walktalk": 1,
+			"fika": 2
+		},
+		{
+			"name": "Peter Hamberg",
+			"walktalk": 1,
+			"fika": 2
+		},
+		{
+			"name": "Peter Törnhult",
+			"walktalk": 1,
+			"fika": 2
+		},
+		{
+			"name": "Regina Sipos",
+			"walktalk": 1,
+			"fika": 2
+		},
+		{
+			"name": "Teddy Zetterlund",
+			"walktalk": 1,
+			"fika": 2
+		},
+		{
+			"name": "Tobias Modig",
+			"walktalk": 1,
+			"fika": 2
+		},
+		{
+			"name": "Torbjörn Vading",
+			"walktalk": 1,
+			"fika": 2
+		}
+	]
+}
